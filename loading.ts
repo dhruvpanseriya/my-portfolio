@@ -1,25 +1,17 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const progress = document.querySelector(".progress");
+  const loaderContainer = document.getElementById("loader");
 
-function hideLoader(): void {
-    const loader = document.getElementById("loader");
-    if (loader) {
-        loader.style.display = "none";
+  // Simulate progress
+  let width = 0;
+  const loadingInterval = setInterval(() => {
+    if (width >= 100) {
+      clearInterval(loadingInterval);
+      loaderContainer.classList.add("hidden"); // Hide loader after completion
+      document.body.style.overflow = "auto"; // Allow scrolling on main content
+    } else {
+      width += 1; // Increase progress
+      progress.style.width = width + "%"; // Update progress width
     }
-
-    const mainContent = document.querySelector(".main-content");
-    if (mainContent) {
-        (mainContent as HTMLElement).style.display = "block";
-    }
-}
-
-function startLoader(): void {
-    const loader = document.getElementById("loader");
-    if (loader) {
-        loader.style.display = "flex";
-    }
-
-   setTimeout(hideLoader, 20000);
-}
-
-window.onload = () => {
-    startLoader();
-};
+  }, 30); // Adjust speed as needed
+});
