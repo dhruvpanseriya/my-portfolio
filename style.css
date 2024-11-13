@@ -121,41 +121,55 @@ nav ul li a:hover::after {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Shining effect */
-.btn-connect::before {
+.btn-connect::before,
+.btn-connect::after {
   content: "";
   position: absolute;
   top: 0;
-  left: -75%;
   height: 100%;
+  transform: skewX(-25deg);
+  animation: shine 1.8s infinite;
+}
+
+.btn-connect::before {
+  left: -75%;
   width: 50%;
   background: rgba(255, 255, 255, 0.5);
-  transform: skewX(-25deg);
-  transition: left 0.5s ease;
 }
 
-.btn-connect:hover::before {
-  left: 125%;
+.btn-connect::after {
+  left: -85%;
+  width: 20%;
+  background: rgba(255, 255, 255, 0.7);
+  animation-delay: 0.2s;
 }
 
-/* Hover effect for lift and shadow */
+/* Continuous Shine Animation */
+@keyframes shine {
+  from { left: -100%; }
+  to { left: 150%; }
+}
+
+/* Hover Effect */
 .btn-connect:hover {
   transform: translateY(-3px);
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Animation to create continuous shine */
-@keyframes shine {
-  from {
-    left: -75%;
+/* Gyroscope-based Windward Effect for Mobile */
+@media (max-width: 768px) {
+  body {
+    perspective: 1000px;
   }
-  to {
-    left: 125%;
-  }
-}
 
-.btn-connect::before {
-  animation: shine 1.5s infinite;
+  .main-section {
+    transform-style: preserve-3d;
+  }
+
+  /* Reacts to device tilt */
+  .Hero-image {
+    transition: transform 0.3s ease;
+  }
 }
 
 
@@ -235,7 +249,7 @@ nav ul li a:hover::after {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  justify-content: flex-start;
+  align-items: baseline;
 }
 
 .about-content {
@@ -266,7 +280,6 @@ nav ul li a:hover::after {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: left;
   margin-bottom: 20px;
 }
 
@@ -381,15 +394,18 @@ nav ul li a:hover::after {
   flex-direction: column;      
   justify-content: center;    
   align-items: center;      
-  height: 615px;            
+  height: 700px;            
   background-color: #FAFAFF;
-  border-bottom: 2px solid #cccccc;    
+  border-bottom: 2px solid #cccccc;
+  overflow: hidden;
 }
+
 
 .Hero-image {
   width: 850px;
   height: auto;
   padding-bottom: 32px;
+  transition: transform 0.2s ease-out;
 }
    
 main {
@@ -551,6 +567,8 @@ footer .social-links a {
 
   .main-section{
     padding: 24px;
+    padding-top: 32px;
+    padding-bottom: 32px;
     height: auto;
     border-bottom: 2px solid #cccccc;
   }
@@ -583,6 +601,24 @@ footer .social-links a {
     padding-right: 24px;
     padding-top: 32px;
     padding-bottom: 32px;
+    text-align: center;
+  }
+
+  .about-content{
+    align-items: center;
+  }
+
+  .about-text{
+    align-items: center;
+  }
+
+  .about-text p {
+    text-align: center;
+  }
+
+  .skills{
+    text-align: center;
+    align-items: center;
   }
 
   .design-cards {
